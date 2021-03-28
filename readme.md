@@ -13,19 +13,31 @@
 ---------------------------------------------------------------------
 kafka command after docker up 
 
-1. docker exec -it kafka bin/sh // docker execute in interactive kakafa shell mode
+1. // docker execute in interactive kakafa shell mode
+
+docker exec -it kafka bin/sh
+
+------------------------------------
+
 2. ls
-3. cd /opt/
-4. ls
-5. cd kafka
-6. ls
-7. cd bin/
-8. ls
-9. cd ..
-10. create topic run the command
+3. cd /opt/kafka
 
-./bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic kausar
+4. create topic run the command
+-------------------------------------------------------------------
 
-11. kafka list---
-./bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+bin/kafka-topics.sh --create --topic mrk --bootstrap-server localhost:9092
+-------------------------------------------------------------------------
 
+5. to display usage information
+
+bin/kafka-topics.sh --describe --topic mrk --bootstrap-server localhost:9092
+---------------------------------------------------------------------------------
+
+6. Write in kafka
+
+bin/kafka-console-producer.sh --topic mrk --bootstrap-server localhost:9092
+-----------------------------------------------------------------------------------
+
+7. Read Kafka
+
+bin/kafka-console-consumer.sh --topic mrk --from-beginning --bootstrap-server localhost:9092
