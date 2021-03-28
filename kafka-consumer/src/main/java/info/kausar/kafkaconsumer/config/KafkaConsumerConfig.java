@@ -43,20 +43,14 @@ public class KafkaConsumerConfig {
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configs.put(ConsumerConfig.GROUP_ID_CONFIG, "kausar2");
-//        JsonDeserializer<User> deserializer = new JsonDeserializer<>();
-//        deserializer.addTrustedPackages("info.kausar.kafka"); //your producer package
-//        return new DefaultKafkaConsumerFactory<>(configs, new StringDeserializer(), deserializer);
         return new DefaultKafkaConsumerFactory<>(configs, new StringDeserializer(), new JsonDeserializer<>(User.class, false));
     }
 
-//    DefaultKafkaConsumerFactory<String, Object> cf = new DefaultKafkaConsumerFactory<>(props,
-//            new IntegerDeserializer(), new JsonDeserializer<>(Cat1.class, false));
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, User> userKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, User> factory = new ConcurrentKafkaListenerContainerFactory<String, User>();
         factory.setConsumerFactory(userConsumerFactory());
-//        factory.setMessageConverter(new StringJsonMessageConverter());
 
         return factory;
     }
